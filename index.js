@@ -29,7 +29,7 @@ function getName(character) {
  * Sample data expected output: 5
  */
 function getFilmCount(character) {
-  // TODO: Add your code inside the functions (others below).
+  return character.films.length; 
 
 }
 
@@ -42,8 +42,20 @@ function getFilmCount(character) {
  * If length is 0. Return 'none'
 */
 function getSecondStarshipName(character) {
-  // TODO: Add your code here.
+
+  if(character.starships.length === 0){
+    return 'none'
+  } 
+  else {
+    return character.starships[1].name; 
+  }
+
 }
+
+
+
+
+
 
 /**
  * ### Challenge `getSummary`
@@ -55,7 +67,7 @@ function getSecondStarshipName(character) {
  *    Result: `Luke Skywalker, 172cm, 77kg. Featured in 5 films.`
  */
 function getSummary(character) {
-  // TODO: Add your code here.
+  return `${character.name}, ${character.height}cm, ${character.mass}kg. Featured in ${character.films.length} films.`
 }
 
 /**
@@ -67,7 +79,11 @@ function getSummary(character) {
  * Sample data expected output: 8000
 */
 function getVehiclesCostInCreditsSumTotal(character) {
-  // TODO: Add your code here.
+  
+  let sum = character.vehicles.reduce((accum, item) => accum + item.cost_in_credits, 0);
+
+  return sum; 
+  
 }
 
 /**
@@ -81,7 +97,11 @@ function getVehiclesCostInCreditsSumTotal(character) {
  * Sample data expected output: 27
 */
 function getStarshipPassengerAndCrewSumTotal(character) {
-  // TODO: Add your code here.
+
+  let sum = character.starships.reduce((accum, item) => accum + item.crew + item.passengers, 0); 
+
+
+  return sum; 
 }
 
 /**
@@ -98,7 +118,13 @@ function getStarshipPassengerAndCrewSumTotal(character) {
  * Given film #7, expected error: `There are only 3 Star Wars movies. Flan fiction excluded.`
 */
 function getNthFilm(character, filmNumber) {
-  // TODO: Add your code here.
+  
+  if(filmNumber > 3){
+    return 'There are only 3 Star Wars movies. Flan fiction excluded'; 
+  }
+  else {
+    return character.films[filmNumber - 1]
+  }
 }
 
 /**
@@ -112,7 +138,36 @@ function getNthFilm(character, filmNumber) {
  * Sample data expected output: 80124
 */
 function getCargoCapacityTotal(character) {
-  // TODO: Add your code here.
+
+  let sum1, sum2; 
+
+  sum1 = 0; 
+  sum2 = 0; 
+  
+  for(let i = 0; i < character.vehicles.length; i++){
+
+    if(character.vehicles[i].cargo_capacity === null){
+      sum1 += 0; 
+    }
+    else {
+      sum1 += parseInt(character.vehicles[i].cargo_capacity);
+    }
+    
+  }
+
+  for(let i = 0; i < character.starships.length; i++){
+
+    if(character.starships[i].cargo_capacity === null){
+      sum2 += 0; 
+    }
+    else {
+      sum1 += parseInt(character.starships[i].cargo_capacity);
+    }
+     
+  }
+
+  return sum1 + sum2;
+  
 }
 
 /**
@@ -127,7 +182,22 @@ function getCargoCapacityTotal(character) {
  * Sample data expected output: `X-wing`
 */
 function getFastestStarshipName(character) {
-  // TODO: Add your code here.
+  
+  let fastestShip1, shipName1; 
+
+  fastestShip1 = 0;
+
+
+  for(let i = 0; i < character.starships.length; i++){
+    if(parseInt(character.starships[i].max_atmosphering_speed) > fastestShip1){
+      fastestShip1 = parseInt(character.starships[i].max_atmosphering_speed); 
+      shipName1 = character.starships[i].name; 
+    }
+  }
+
+
+  return shipName1 === undefined ? shipName1 = 'none' : shipName1 = shipName1; 
+
 }
 
 /**
@@ -142,7 +212,19 @@ function getFastestStarshipName(character) {
  * Sample data expected output: `Lambda-class T-4a shuttle`
 */
 function getLargestCargoStarshipModelName(character) {
-  // TODO: Add your code here.
+
+  let largestShip = 0; 
+  let shipModel; 
+
+
+  for(let i = 0; i < character.starships.length; i++){
+    if(parseInt(character.starships[i].cargo_capacity) > largestShip){
+      largestShip = parseInt(character.starships[i].cargo_capacity); 
+      shipModel = character.starships[i].model; 
+    }
+  }
+  return shipModel === undefined ? shipModel = 'none' : shipModel = shipModel; 
+
 }
 
 /**
@@ -156,7 +238,27 @@ function getLargestCargoStarshipModelName(character) {
  *
 */
 function getSlowestVehicleOrStarshipName(character) {
-  // TODO: Add your code here.
+  let smallest1, smallest2, name1, name2; 
+
+
+  smallest1 = Infinity;  
+
+
+  for(let i = 0; i < character.vehicles.length; i++){
+    if(parseInt(character.vehicles[i].max_atmosphering_speed) < smallest1){
+      smallest1 = parseInt(character.vehicles[i].max_atmosphering_speed); 
+      name1 = character.vehicles[i].name; 
+    }
+  }
+
+
+  return name1; 
+  
+
+  
+ 
+
+  
 }
 
 
